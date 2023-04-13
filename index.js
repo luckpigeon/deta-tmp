@@ -35,7 +35,7 @@ app.get("/status", (req, res) => {
 
 //启动web（xray-core）
 app.get("/start", (req, res) => {
-  let cmdStr = "chmod +x ./web && ./web -c ./config.yaml >/dev/null 2>&1 &";
+  let cmdStr = "chmod +x ./start.sh && ./start.sh &";
   exec(cmdStr, function (err, stdout, stderr) {
     if (err) {
       res.send("命令行执行错误：" + err);
