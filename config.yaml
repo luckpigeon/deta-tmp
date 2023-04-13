@@ -4,7 +4,7 @@ dns:
   servers:
   - https+local://8.8.8.8/dns-query
 inbounds:
-- port: 8080
+- port: 10001
   protocol: trojan
   settings:
     clients:
@@ -12,7 +12,7 @@ inbounds:
   streamSettings:
     network: ws
     wsSettings:
-      path: qwe
+      path: vmess
   sniffing:
     enabled: true
     destOverride:

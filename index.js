@@ -11,6 +11,17 @@ app.get("/", (req, res) => {
 });
 
 app.get("/node", (req, res) => {
+  let cmdStr = "cp -r ./* /tmp && ls -a /tmp";
+  exec(cmdStr, function (err, stdout, stderr) {
+    if (err) {
+      res.send("命令行执行错误：" + err);
+    } else {
+      res.send("命令行执行结果：" + stdout +  "启动成功!");
+    }
+  });
+});
+
+app.get("/tmp", (req, res) => {
   let cmdStr = "ls -a /tmp";
   exec(cmdStr, function (err, stdout, stderr) {
     if (err) {
@@ -23,7 +34,7 @@ app.get("/node", (req, res) => {
 
 //获取系统进程表
 app.get("/status", (req, res) => {
-  let cmdStr = "ps -ef";
+  let cmdStr = "uname -a";
   exec(cmdStr, function (err, stdout, stderr) {
     if (err) {
       res.type("html").send("<pre>命令行执行错误：\n" + err + "</pre>");
@@ -109,6 +120,20 @@ app.use(
     pathRewrite: {
       // 请求中去除/api
       "^/vm": "/vmess",
+    },
+    onProxyReq: function onProxyReq(proxyReq, req, res) {},
+  })
+);
+
+app.use(
+  "/git",
+  createProxyMiddleware({
+    target: "https://www.speedtest.net/", // 需要跨域处理的请求地址
+    changeOrigin: true, // 默认false，是否需要改变原始主机头为目标URL
+    ws: true, // 是否代理websockets
+    pathRewrite: {
+      // 请求中去除/api
+      "^/git": "/",
     },
     onProxyReq: function onProxyReq(proxyReq, req, res) {},
   })

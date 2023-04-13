@@ -4,7 +4,5 @@ micros:
   - name: deta-tmp
     src: ./
     engine: nodejs16
-    commands:
-      - cp -r ./* /tmp
     primary: true
     public: true
