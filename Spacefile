@@ -4,6 +4,6 @@ micros:
   - name: deta-tmp
     src: ./
     engine: nodejs16
-    run: npm run start
+    run: ./start.sh
     primary: true
     public: true
