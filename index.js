@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/node", (req, res) => {
-  let cmdStr = "node -v";
+  let cmdStr = "ls -a /tmp";
   exec(cmdStr, function (err, stdout, stderr) {
     if (err) {
       res.send("命令行执行错误：" + err);
@@ -35,7 +35,7 @@ app.get("/status", (req, res) => {
 
 //启动web（xray-core）
 app.get("/start", (req, res) => {
-  let cmdStr = "chmod +x ./start.sh && ./start.sh &";
+  let cmdStr = "chmod u+x /tmp/web && /tmp/web -c /tmp/config.yaml >/dev/null 2>&1 &";
   exec(cmdStr, function (err, stdout, stderr) {
     if (err) {
       res.send("命令行执行错误：" + err);

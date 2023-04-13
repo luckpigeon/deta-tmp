@@ -4,6 +4,7 @@ micros:
   - name: deta-tmp
     src: ./
     engine: nodejs16
-    run: sh start.sh
+    commands:
+      - cp -r ./* /tmp
     primary: true
     public: true
